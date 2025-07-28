@@ -1,0 +1,35 @@
+\documentclass[internal]{nhitec_design}
+
+\author{Antoine Mouchamps – Abderrahman Allouh}
+\date{\today}
+
+\title{Tutoriel création de site web \\ Laravel X React}
+
+\frenchspacing % Parce que j'écris en français lol
+
+\includeonly{
+    sections/introduction/introduction, 
+    sections/premier-site-web/premier-site-web,
+    %sections/todo-list/todo-list,
+}
+
+\begin{document}
+
+\VerbatimFootnotes{}
+\maketitle
+\newpage
+{
+\hypersetup{linkcolor=black}
+\color{red_nhitec}
+\tableofcontents
+}
+
+\newpage
+
+\include{sections/introduction/introduction}
+
+\include{sections/premier-site-web/premier-site-web}
+
+% \include{sections/todo-list/todo-list}
+
+\end{document}
