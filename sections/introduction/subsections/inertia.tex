@@ -1,0 +1,25 @@
+\subsection{Inertia.js, c'est quoi?}
+
+\subsubsection[Prélude]{Prélude}
+
+Vous avez maintenant vu ce qu’est \laravel{} et ce qu’est \react{}.  
+La grande question qui se pose, c’est : \textit{comment faire communiquer ces deux mondes ?}  
+
+Traditionnellement, un \textbf{backend} comme \laravel{} enverrait ses données à travers une \textit{API}\footnote{Une API, ou interface de programmation d'application, est un ensemble de règles et de spécifications qui permettent à différents logiciels de communiquer et d'échanger des données}.  
+Le \textbf{frontend}, ici \react{}, consommerait ensuite ces données pour les afficher.  
+Mais construire une API complète\footnote{Une API complète nécessite souvent de créer beaucoup d’endpoints, gérer les statuts d’erreur, les authentifications, et parfois même écrire de la documentation pour l’utiliser correctement.} peut rapidement devenir lourd et complexe, surtout quand le but est juste de rendre vos pages React.
+  
+\inertia{} agit comme une \textit{colle magique} entre \laravel{} et \react{} :  
+il vous permet de continuer à écrire vos \controllers{} et vos \routes{} Laravel comme vous l’avez toujours fait,  
+mais au lieu de retourner une vue \blade{}, vous retournez une vue \react{} directement.  
+
+En pratique, ça veut dire :
+\begin{itemize}
+    \item vous gardez toute la logique côté Laravel (routes, contrôleurs, modèles, etc.),  
+    \item \inertia{} transmet les données\footnote{Sous le capot, Inertia utilise principalement le JSON pour transporter les données entre Laravel et React.} à vos composants React,  
+    \item vos pages sont rendues par React, mais sans devoir passer par la mise en place compliquée d’une API.
+\end{itemize}
+
+\textbf{En clair :} Inertia supprime la barrière entre le backend et le frontend.
+
+Si vous êtes intéressés par la documentation officielle d’Inertia.js, vous pouvez la lire ici\footnote{\href{https://inertiajs.com}{https://inertiajs.com}}.
