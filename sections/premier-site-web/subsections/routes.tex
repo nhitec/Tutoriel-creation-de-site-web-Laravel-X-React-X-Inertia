@@ -1,28 +1,62 @@
-\subsection{Premières \routes{} \& \views{}}
+\subsection{Premières \routes{} \& composants React}
 
 \subsubsection[welcome!]{welcome!\label{sec:welcome!}}
-Les \routes{} se trouvent dans le fichier \verb|routes\web.php|. \\
-\begin{wrapfigure}[5]{r}{0.5\textwidth}
-    \vspace{-0.5cm}
-    \includegraphics[width=0.5\textwidth]{figures-C1/basic_route.pdf}
-\end{wrapfigure}
-Dans ce fichier se trouve cette \route{} par défaut. Le premier argument de \verb|get()| est l'adresse (absolue) qui sera visée par la \route{}. En l'occurence, la fonction en deuxième argument sera exécutée lorsque l'URL est '/', donc \url{http://tutorialstepbystep/}. Remarquons que la fonction excécutée retourne la \view{} \textit{welcome}, c'est pourquoi nous voyons la page d'accueil de laravel en nous rendant à cette adresse.
+En \laravel{} + \inertia{}, les \routes{} se trouvent toujours dans \verb|routes/web.php|.  
+Une \route{}, c’est simplement un chemin que Laravel surveille. Quand quelqu’un visite ce chemin dans le navigateur, Laravel sait quoi afficher.
 
-Allons voir le contenu de cette \view{}. Les \views{} en \laravel{} ne sont pas écrites en fichier \verb|.html| classiques, mais sous la forme de fichiers \verb|fichier.blade.php|, qui permettent d'ajouter des fonctionnalités en plus\footnote{\textit{\underline{HINT:}} toutes les commandes commençant par un \verb|@| existent grâce au format \blade{}, ainsi que la commande \verb|{{}}|. Plus d'informations \href{https://laravel.com/docs/10.x/blade#blade-directives}{ici}.} à l'\html{} classique. 
-
-Il y a bien beaucoup de chose dedans mais pas de panique: supprimons tout.
-
-Plus précisément, ne gardons que ceci:
-
-\begin{figure}[!h]
+Voici la route par défaut que vous trouverez dans un projet neuf :
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{figures-C1/welcome_blade_empty.pdf}
+    \includegraphics[width=0.75\textwidth]{figures-C1/basic_route.png}
 \end{figure}
 
-On y voit déjà plus clair. Dans ce qu'il reste, il n'y a que deux choses principales à retenir pour le moment: 
+\begin{itemize}
+    \item \verb|Route::get('/', ...)| signifie : « Quand quelqu’un va à l’adresse \verb|/| (la page d’accueil), fais ce qu’il y a dans les accolades ».
+    \item Ici, on utilise \verb|Inertia::render('Welcome')| pour dire à Laravel : « Affiche la page React \texttt{Welcome} ».
+    \item \texttt{Welcome} correspond à un fichier \verb|Welcome.jsx| qui se trouve dans \verb|resources/js/Pages|.
+\end{itemize}
+
+\subsubsection[Welcome]{Welcome}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[t]{0.50\textwidth}
+    \vspace{0pt}\raggedright
+    Allons voir le fichier \verb|Welcome.jsx|. \\
+    Par défaut, il contient beaucoup de code inutile pour notre formation : styles, textes et boutons de démonstration.  
+    On va tout effacer et repartir d’une base simple.\\
+    Voici à quoi ressemble le fichier \verb|Welcome.jsx| après nettoyage.
+    Il ne contient qu’un composant React minimal, prêt à accueillir notre contenu.
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.40\textwidth} % réduit de 0.46 à 0.40
+    \vspace{0pt}\centering
+    \includegraphics[width=0.9\linewidth]{figures-C1/welcome_jsx_empty.png} % 0.9 au lieu de 1.0
+  \end{minipage}
+\end{figure}
+
+\paragraph{Explication du code}
+\begin{itemize}
+    \item \verb|export default function Welcome()| : on crée un composant React qui s’appelle \textbf{Welcome} et on l’exporte pour qu’il puisse être utilisé ailleurs.
+    \item \verb|<div style={{ ... }}>| : on crée une boîte (\texttt{div}) et on lui applique du style directement en JavaScript grâce à la syntaxe \verb|{{ ... }}|.
+    \item \verb|display: "flex"| : active \textbf{Flexbox}, une méthode pratique pour centrer des éléments.
+    \item \verb|justifyContent: "center"| : centre le contenu horizontalement.
+    \item \verb|alignItems: "center"| : centre le contenu verticalement.
+    \item \verb|height: "100vh"| : la boîte prend toute la hauteur de l’écran (\texttt{vh} = \textit{viewport height}).
+    \item \verb|fontSize: "2rem"| : définit la taille du texte à deux fois la taille normale.
+    \item \verb|fontWeight: "bold"| : met le texte en gras.
+\end{itemize}
+
+\begin{center}
+    \fbox{\includegraphics[width=0.65\textwidth]{figures-C1/welcome_page.png}}
+\end{center}
+
+Résultat : une page toute blanche avec juste \textbf{Welcome} bien centré, qui servira de point de départ pour construire la suite du site.
+
+\paragraph{À retenir :}
 \begin{enumerate}
-    \item le tag \verb|<head>| est l'endroit où les styles (\css{}) et scripts (\jquery{}  \& \js{}) sont importés, ainsi que 2-{}3 autres choses.
-    \item le tag \verb|<body>| est le tag qui contiendra tout ce qui sera affiché par le navigateur. Donc pour le moment, en allant sur votre site, vous verrez une page vide.
+    \item Les \routes{} définissent quel composant React sera affiché.
+    \item \verb|Inertia::render('Welcome')| charge le fichier \verb|Welcome.jsx|.
+    \item On part volontairement d’une page simple et vide pour mieux comprendre ce que l’on ajoute ensuite.
 \end{enumerate}
 
 \subsubsection[Controller][laravel.com/docs/10.x/controllers\#introduction]{Controller}
