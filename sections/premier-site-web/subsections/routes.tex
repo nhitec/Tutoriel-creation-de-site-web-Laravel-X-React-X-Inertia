@@ -59,83 +59,83 @@ Résultat : une page toute blanche avec juste \textbf{Welcome} bien centré, qui
     \item On part volontairement d’une page simple et vide pour mieux comprendre ce que l’on ajoute ensuite.
 \end{enumerate}
 
-\subsubsection[Controller][laravel.com/docs/10.x/controllers\#introduction]{Controller}
+\subsubsection[Controller][laravel.com/docs/12.x/controllers\#introduction]{Controller}
 
-Bon, il est temps de remplir tout ca.
+Bon, il est temps de remplir tout ça.
 
 \begin{wrapfigure}[9]{r}{0.25\textwidth}
-    \vspace{-0.5cm}
-    \includegraphics[width=0.25\textwidth]{figures-C1/3_premieres_views.pdf}
+    \includegraphics[width=0.25\textwidth]{figures-C1/first_views.png}
 \end{wrapfigure}
 
-Commençons par créer un fichier \verb|pages| dans \verb|resources/views/|, et ajoutez trois autres fichiers comme indiqué ci-contre.
 
-Ensuite, il va falloir créer un \controller{}. Pour cela, tapez
-\verb|sail artisan make:controller PagesController|\footnote{\verb|sail artisan make:| est une commande très utile pour créer énormément de fichiers que nous verrons plus tard. Comme nous l'utilisons au travers de \laravelsail, il faut utiliser \verb|sail artisan| à la place}. \linebreak Les \controllers{} se trouvent dans \verb|app\Http\controllers\|. Dans \verb|PagesController|, créez trois fonctions comme à la \textsc{Figure }\ref{fig:PagesController1}.
+On commence par préparer les pages React.  
+Le dossier \verb|resources/js/Pages/| est déjà en place : ajoutez simplement trois fichiers vides \verb|Index.jsx|, \verb|Services.jsx| et \verb|About.jsx|.  
+Nous y mettrons du contenu plus tard — pour l’instant ils servent juste de cibles à Inertia.
+
+Ensuite, il nous faut un \controller{} pour relier tout ça au backend.  
+Pour le créer, tapez dans le terminal :\footnote{\verb|sail artisan make:| permet de générer rapidement des fichiers (controllers, modèles, etc.).  
+Comme nous utilisons \laravelsail{}, on précède \texttt{artisan} de \texttt{sail}.}
+
+\begin{lstlisting}[language=bash]
+sail artisan make:controller PagesController
+\end{lstlisting}
+
 
 \SaveVerb{term}|PagesController|
 \begin{figure}[!h]
     \centering
     \begin{subfigure}{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures-C1/pages_controller_1a.pdf}
+        \includegraphics[width=\textwidth]{figures-C1/pages_controller_1a.png}
     \end{subfigure}
     \begin{subfigure}{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures-C1/pages_controller_1b.pdf}
+        \includegraphics[width=\textwidth]{figures-C1/pages_controller_1b.png}
     \end{subfigure}
     \caption{\protect\UseVerb{term}\label{fig:PagesController1}}
 \end{figure}
 
-Vous l'aurez compris, \verb|return view()| permet d'afficher la \view{} donnée en argument: en l'occurence, les 3 \views{} \verb|index|, \verb|services| et \verb|about|. Notez que \verb|pages.| indique que ces 3 \views{} se trouvent dans le dossier \verb|pages|.
+Le fichier généré se trouve dans \verb|app/Http/Controllers|.  
+On y ajoutera trois méthodes (\verb|index|, \verb|services|, \verb|about|) qui pointeront vers nos composants React.
 
 \newpage 
 
-Si vous vous rappellez bien de ce qu'on a vu plus tôt, chaque \view{} \html{} doit contenir un tag \verb|<head>|. Celui-ci sera le même pour chaque page donc il serait judicieux\footnote{\textbf{D.R.Y}: \textit{Don't Repeat Yourself!}} de créer une sorte de template dans lequel on mettrait le \verb|<head>| et qui sera ensuite utilisé pour les 26854 pages que comptera bientôt notre site! 
+Pour avoir un premier rendu (même minimal), déposons un simple titre dans chacun des trois composants React créés plus haut.  
+Cela nous permettra de vérifier que les routes affichent bien la bonne page.
 
-COMME PAR HASARD les fichiers \verb|.blade.php| nous permettent de faire cela: commencez par créer un dossier \verb|layouts| dans les views, et créez un fichier dedans appellé \verb|app.blade.php|. Ensuite, remplissez-le avec le contenu de \verb|welcome.blade.php| (que vous pouvez désormais supprimer), puis ajoutez la commande \verb|@yield('content')| dans le \verb|<body>|. Enfin, il ne reste plus qu'a utiliser ce layout pour remplir vos 3 nouvelles \views{}.
-
-\SaveVerb{about}|about|
-\SaveVerb{services}|services|
-\SaveVerb{index}|index|
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.49\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures-C1/basic_about.pdf}
-     \end{subfigure}
-     \begin{subfigure}[b]{0.49\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures-C1/basic_services.pdf}
-     \end{subfigure}
-     \begin{subfigure}[b]{1\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures-C1/basic_accueil.pdf}
-     \end{subfigure}
-        \caption{Contenu des \views{} \protect\UseVerb{about} (à gauche), \protect\UseVerb{services} (à droite) et \protect\UseVerb{index} (en bas)}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures-C1/about_ini.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures-C1/services_ini.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures-C1/index_ini.png}
+    \end{subfigure}
+    \caption{Contenu minimal des composants React : \texttt{About} (gauche), \texttt{Services} (milieu) et \texttt{Index} (droite).}
 \end{figure}
-Petit tuto \html{} rapide: le tag \verb|<p>| renferme un pparagraphe, et le tag \verb|<h1>| contient lui un h1titre. De même, \verb|<h2>| désignera un h2sous-titre, \verb|<h3>| un h3sous-sous-titre, \verb|<h4>| un h4sous-sous-sous-titre, \ldots
 
-Que se passe-t'il exactement? Chacune des \views{} va prendre le contenu du layout \verb|app| (via \verb|@extends()|), et remplir sa section \verb|content| par ce qu'il y a entre \verb|@section| et \verb|@endsection|. Simple et efficace! Nous rajouterons d'autres choses dans ce layout par la suite.
+Enfin, pour pouvoir admirer le fruit de votre labeur, créez les \routes{} correspondantes dans \verb|routes/web.php|.  
+On déclare notre \controller{}, puis on associe chaque URL à la bonne méthode. Résultat : aller sur \verb|/| affiche la page d’accueil, \verb|/services| la page des services, et \verb|/about| la page « À propos ».
 
-\newpage
-
-Enfin, pour pouvoir admirer le fruit de votre dur labeur, il faut créer les \routes{} qui permettront d'afficher ces pages. Pour cela, rendez-vous dans \verb|web.php|:
-
-\begin{wrapfigure}[16]{r}{0.7\textwidth}
-    \vspace{-0.5cm}
-    \includegraphics[width=0.7\textwidth]{figures-C1/3_premieres_routes.pdf}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures-C1/routes_ini.png}
     \caption{}
-\end{wrapfigure}
-Afin d'utiliser notre nouveau controller, il faut le déclarer pour que \laravel{} sache qu'il existe. C'est à ca que sert ``\verb|use gngngn|'', (ce qui est suit est plutôt évident).
-Ensuite, décortiquons ce qui se passe: Comme précédement, le 1er argument de \verb|get()| donne l'adresse. Par exemple, la 2eme route est appellée à l'URL \url{http://tutorialstepbystep/services}. Le deuxième argument donne dans une \texttt{array} le \controller{} ainsi que sa méthode à exécuter. Pour la deuxième route, aller à l'URL mensionnée va donc exécuter la fonction \verb|services()| que nous avons créée il y a 5 (ou 40) minutes. Celle ci nous retourne la \view{} correspondante, donc en allant sur cet URL nous voyons dans un coin de l'écran:
-
-\begin{figure}[!h]
-    \centering
-    \fbox{\includegraphics[]{figures-C1/basic_services_web.pdf}}
-    \caption{page internet moche}
 \end{figure}
 
-C'est laid, pas vrai? Nous allons améliorer cela à la prochaine section.
+Comme toujours, le premier argument d’une route est l’adresse, et le second indique quel \controller{} et quelle méthode exécuter.  
+Ici, chaque méthode retournera \verb|Inertia::render('NomDePage')|, ce qui affichera le composant React correspondant.
 
-\newpage
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.55\textwidth]{figures-C1/page_services.png}}
+    \caption{Affichage minimal de la page \texttt{Services} via React + Inertia.}
+\end{figure}
+
+C’est basique, pas très joli — et c’est normal. À la prochaine section, on ajoute un layout React commun et on commence à styliser l’ensemble.

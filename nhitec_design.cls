@@ -415,6 +415,36 @@
 
 \newcommand{\db}[0]{base de donnée\xspace}
 
+% --- Code blocks (listings) ---
+\RequirePackage{listings}
+\RequirePackage{xcolor}
+\RequirePackage{upquote} % apostrophes droites dans le code
+
+% Style par défaut pour tous les listings
+\lstset{
+  language={},                 % défini au cas par cas
+  basicstyle=\ttfamily\footnotesize,
+  columns=fullflexible,        % évite les lettres écrasées -> meilleur copié/collé
+  keepspaces=true,             % préserve l'indentation
+  showstringspaces=false,
+  breaklines=true,             % coupe proprement les longues lignes
+  autogobble=true,             % enlève l'indentation commune
+  frame=single,
+  rulecolor=\color{red_nhitec},
+  captionpos=b,
+  upquote=true,
+}
+
+% Raccourcis de styles par langage
+\lstdefinestyle{bashstyle}{language=bash}
+\lstdefinestyle{phpstyle}{language=php}
+\lstdefinestyle{jsstyle}{language=JavaScript}
+
+% Petits environnements pratiques
+\newenvironment{bashcode}{\lstset{style=bashstyle}}{}
+\newenvironment{phpcode}{\lstset{style=phpstyle}}{}
+\newenvironment{jscode}{\lstset{style=jsstyle}}{}
+
 
 \LetLtxMacro{\oldsubsubsection}{\subsubsection}
 
