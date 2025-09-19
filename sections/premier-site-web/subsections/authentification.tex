@@ -93,13 +93,13 @@ Voici les pages que vous devriez obtenir:
 
 \newpage
 
-Remarquez que le bouton de la \textsc{Figure~\ref{fig:auth_forgot}} ne fonctionne pas, nous règlerons ce problème dans une future \texttt{Section~(WIP)}.
+Remarquez que le bouton de la \textsc{Figure~\ref{fig:auth_forgot}} ne fonctionne pas, nous réglerons ce problème dans une future \texttt{Section~(WIP)}.
 
-\subsubsection[Middlewares][laravel.com/docs/10.x/middleware]{Middlewares}
+\subsubsection[Middlewares][laravel.com/docs/10.x/middleware]{Middlewares}\label{sec:middleware}
 
 Nous arrivons à la fin! La dernière chose à faire, c'est protéger quelques \routes. En effet, il est préférable que n'importe qui ne puisse pas accéder aux posts sans s'être préalablement authentifié. Il faut donc trouver un moyen de vérifier si un utilisateur est connecté avant de lui donner accès à la gestion/création de posts. C'est exactement à cela que servent les \middlewares{}.
 
-De manière générale, les \middlewares{} sont des fonctions qui seront exécutées ``entre deux requêtes'', pour par exemple interdire d'accès une certaine \route{} et rediriger l'utilisateur selon certaines conditions.
+De manière générale, les \middlewares{} sont des fonctions qui seront exécutées ``entre deux requêtes'', pour par exemple interdire l'accès à une certaine \route{} et rediriger l'utilisateur selon certaines conditions.
 
 Les \middlewares{} se trouvent dans le dossier \verb|app/Http/Middleware| et sont configurés par le fichier \verb|app/Http/Kernel.php|. Les \middlewares{} que nous pouvons assigner manuellement aux \routes{}/\controllers{} sont ceux listés dans \verb|$middlewareAliases|.
 
@@ -111,6 +111,6 @@ En ce qui nous concerne, le \middleware{} \verb|'auth'| est celui qu'il nous fau
     \caption{}
 \end{figure}
 
-Et voilà! Désormais, lorsque vous essayez de voir ou de créer un post sans être connecté, vous devriez vous faire rediriger vers la page de connection.
+Et voilà! Désormais, lorsque vous essayez de voir ou de créer un post sans être connecté, vous devriez vous faire rediriger vers la page de connexion.
 
 \newpage

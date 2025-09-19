@@ -28,7 +28,7 @@ Voici la route par défaut que vous trouverez dans un projet neuf :
     Voici à quoi ressemble le fichier \verb|Welcome.jsx| après nettoyage.
     Il ne contient qu’un composant React minimal, prêt à accueillir notre contenu.
   \end{minipage}\hfill
-  \begin{minipage}[t]{0.40\textwidth} % réduit de 0.46 à 0.40
+  \begin{minipage}[t]{0.40\textwidth} 
     \vspace{0pt}\centering
     \includegraphics[width=0.9\linewidth]{figures-C1/welcome_jsx_empty.png} % 0.9 au lieu de 1.0
   \end{minipage}
@@ -121,12 +121,12 @@ Cela nous permettra de vérifier que les routes affichent bien la bonne page.
 \end{figure}
 
 Enfin, pour pouvoir admirer le fruit de votre labeur, créez les \routes{} correspondantes dans \verb|routes/web.php|.  
-On déclare notre \controller{}, puis on associe chaque URL à la bonne méthode. Résultat : aller sur \verb|/| affiche la page d’accueil, \verb|/services| la page des services, et \verb|/about| la page « À propos ».
+On déclare notre \controller{}, puis on associe chaque URL à la bonne méthode. Résultat : aller sur \verb|/| affiche la page d'accueil, \verb|/services| la page des services, et \verb|/about| la page « À propos ». De plus, on associe un nom à chaque route de sorte à ce qu'on puisse naviguer entre les pages à la section \ref{sec:navbar}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{figures-C1/routes_ini.png}
-    \caption{}
+    \caption{\texttt{routes/web.php}}
 \end{figure}
 
 Comme toujours, le premier argument d’une route est l’adresse, et le second indique quel \controller{} et quelle méthode exécuter.  

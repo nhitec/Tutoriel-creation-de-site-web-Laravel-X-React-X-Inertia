@@ -389,6 +389,7 @@
 \newcommand{\inertia}[0]{Inertia \includegraphics[height=10pt]{figures-logos/inertia.png}}
 \newcommand{\mysql}[0]{MySQL\xspace}
 \newcommand{\fortify}[0]{Fortify\xspace}
+\newcommand{\tailwind}[0]{Tailwind \!\includegraphics[height=9pt]{figures-logos/tailwind.png}}
 
 \newcommand{\view}[0]{\texttt{view}\xspace}
 \newcommand{\views}[0]{\texttt{views}\xspace}
@@ -413,7 +414,7 @@
 \newcommand{\middleware}[0]{\texttt{middleware}\xspace}
 \newcommand{\middlewares}[0]{\texttt{middlewares}\xspace}
 
-\newcommand{\db}[0]{base de donnée\xspace}
+\newcommand{\db}[0]{base de données\xspace}
 
 % --- Code blocks (listings) ---
 \RequirePackage{listings}
