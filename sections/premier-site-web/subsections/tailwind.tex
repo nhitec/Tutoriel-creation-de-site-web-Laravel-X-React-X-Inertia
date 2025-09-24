@@ -104,7 +104,7 @@ Qu'est-ce que c'est que tout ça? Décomposons tout cela.
 De plus, nous découvrons ici trois nouveaux tags \html{}:
 
 \begin{enumerate}
-    \item \verb|<a>| est un tag permettant la création d'un lien vers une autre URL, que l'on place dans l'attribut \verb|href|. Au lieu de tapez l'URL d'une \route{}, \inertia{} nous permet d'optimiser l'écriture en utilisant la commande \verb|route('nomdelaroute')| afin d'obtenir l'URL en question.~\verb|{...}| permet ensuite de l' ``afficher'' dans le \verb|href|.
+    \item \verb|<a>| est un tag permettant la création d'un lien vers une autre URL, que l'on place dans l'attribut \verb|href|. Au lieu de tapez l'URL d'une \route{}, \inertia{} nous permet d'optimiser l'écriture en utilisant la commande \verb|route('nomdelaroute')| afin d'obtenir l'URL en question.~\verb|{...}| permet ensuite de l'afficher dans le \verb|href|.
     \item \verb|<ul>| est un tag signifiant la création d'une liste.
     \item \verb|<li>| représente un élément d'une liste.
 \end{enumerate}
@@ -144,7 +144,7 @@ C'est bien beau, mais jusque ici le seul moyen de naviguer entre les pages est d
 
 Comme son nom l'indique, elle sert à naviguer entre les pages. Cependant, c'est un gros morceau qui utilise beaucoup de \verb|class| \tailwind{}, donc il va falloir s'accrocher.
 
-Heureusement pour nous, \react{} inclut une bibliothèque de composants prêts à l'emploi \footnote{Ceux-ci se trouvent dans \texttt{resources/js/Components}}. Dans notre exemple, nous allons utiliser \texttt{ResponsiveNavLink.tsx}.
+Heureusement pour nous, \react{} inclut une bibliothèque de composants prêts à l'emploi \footnote{Ceux-ci se trouvent dans \texttt{resources/js/Components}}. Dans notre exemple, nous allons utiliser \texttt{ResponsiveNavLink.jsx}.
 
 D'abord, dans le dossier \verb|resources/js/Layouts|, créez un fichier \verb|AppLayout.jsx|. Remplissez ce fichier avec le contenu de la \textsc{Figure~\ref{fig:navbar}}.
 
