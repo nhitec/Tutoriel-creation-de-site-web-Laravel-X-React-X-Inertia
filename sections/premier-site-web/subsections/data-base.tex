@@ -6,23 +6,28 @@ Nous allons créer une base de données en utilisant l'exemple de posts sur un b
 \phpmyadmin{} est une interface permettant à des ignares comme nou\ldots comme vous* de manipuler et de visualiser le contenu des bases de données facilement sans connaissances en \mysql. Normalement, la configuration a été effectuée lors de la formation précédente et vous devriez pouvoir y accéder en vous rendant sur \url{http://tutolaravel:8080}\footnote{Ou bien \url{http://localhost:8080}, cela dépend de l'url que vous avez choisi dans le \texttt{.env}.}.
 
 \subsubsection[Models][laravel.com/docs/12.x/eloquent\#generating-model-classes]{Models}
-Comme dit dans la \texttt{Section~\ref{sec:fonctionnement&philosophie}}, le \model{} \footnote{Rien à voir avec Kendall Jenner, reste concentré sur la formation.} est l'objet qui nous permettra d'interagir avec les \textit{posts} stockés dans notre base de données \footnote{Pour chaque nouvel objet, on aura un \model{} correspondant.}. Pour le créer, tapez \verb|sail artisan make:model Post -m|.
-Cela génère un fichier \verb|Post.php|, dans \verb|/app/Models/|.
-On peut déjà y ajouter des propriétés comme \verb|$fillable|, qui définissent quels champs peuvent être remplis automatiquement lors de la création d'un nouvel enregistrement
+Comme dit dans la \texttt{Section~\ref{sec:fonctionnement&philosophie}}, le \model{}\footnote{Rien à voir avec Kendall Jenner, reste concentré sur la formation.} est l'objet qui nous permettra d'interagir avec les \textit{posts} stockés dans notre base de données\footnote{Pour chaque nouvel objet, on aura un \model{} correspondant.}. 
+Pour le créer, tapez \verb|sail artisan make:model Post -m|.  
+Cela génère un fichier \verb|Post.php| dans \verb|/app/Models/|. On peut déjà y ajouter des propriétés comme \verb|$fillable|, qui définissent quels champs peuvent être remplis automatiquement lors de la création d'un nouvel enregistrement.
+
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.2\linewidth]{figures-C1/postmodel.png}
+\centering
+\begin{minipage}{0.4\linewidth}
+  \includegraphics[width=\linewidth]{figures-C1/postmodel.png}
   \caption{Exemple d’un modèle Laravel \texttt{Post}}
-\end{figure}
-Voici une explication du code:
+\end{minipage}
+\hfill
+\begin{minipage}{0.55\linewidth}
+Voici une explication du code :  
 \begin{itemize}
   \item \verb|namespace App\Models;| : indique dans quel « dossier logique » se trouve notre classe.  
   \item \verb|use Illuminate\Database\Eloquent\Model;| : importe la classe de base \texttt{Model} de Laravel.  
   \item \verb|class Post extends Model| : on crée une classe \texttt{Post} qui hérite de \texttt{Model}, donc qui bénéficie de toutes les fonctionnalités Eloquent.  
   \item \verb|protected $fillable = ['title', 'body'];| : on définit les colonnes de la table qui peuvent être assignées en masse (par exemple avec \verb|Post::create([...])|). Ici, on autorise \texttt{title} et \texttt{body}.  
 \end{itemize}
-Ainsi, notre model n'est plus un bout de code vide, mais un véritable objet capable de gérer des données venant de la base.
-
+\end{minipage}
+Ainsi, notre \model{} n'est plus un bout de code vide, mais un véritable objet capable de gérer des données venant de la base.
+\end{figure}
 \subsubsection[Migrations: théorie][laravel.com/docs/12.x/migrations\#introduction]{Migrations: comme les oiseaux?}
 
 Une \migration{} est un fichier qui permet de définir les \tables{} de notre base de données. Une \table{} est grosso modo un type de donnée que la \db{} va stocker. Par exemple, la liste de tous les utilisateurs est une \table{}, tout comme les \textit{posts} que nous allons créer. Chaque \table{} contient un certain nombre de \columns{} qui, elles sont les données stockées en tant que telles. En l'occurrence, notre \table{} de \textit{posts} doit contenir une \column{} pour le titre d'un \textit{post} et une pour son contenu en lui-même \footnote{Tous ces termes sont compliqués à décrire avec des mots, mais sont en réalité très intuitifs quand on imagine les données affichées dans un grand tableau à double entrée.}.
@@ -39,9 +44,9 @@ Analysons tout a:
     \item \verb|timestamps()| ajoute une date de création et de modification à la \table{}. Ces deux \columns{} sont également ajoutées par défaut.
 \end{itemize}
 
-\begin{wrapfigure}[17]{r}{0.5\textwidth}
+\begin{wrapfigure}[16]{r}{0.5\textwidth}
     \vspace{-0.5cm}
-    \includegraphics[width=0.5\textwidth]{figures-C1/post_migration.pdf}
+    \includegraphics[width=0.4\textwidth]{figures-C1/post_migration.pdf}
     \caption{Exemple très simple de \migration{}\label{fig:basic_migration}}
 \end{wrapfigure}
 Quelques remarques supplémentaires:
