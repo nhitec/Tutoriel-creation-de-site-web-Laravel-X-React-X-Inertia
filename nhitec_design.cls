@@ -42,6 +42,7 @@
 \RequirePackage{fancyvrb}       % Package to allow \verb inside footnotes
 \RequirePackage[export]{adjustbox}      % Package to put figures to the left and right instead of \centering
 \RequirePackage[inline, shortlabels]{enumitem}      % Package to allow a list to follow a wrapfig and still align correctely.
+\RequirePackage{attachfile2}    % Package to attach file in the .pdf
 
 \setlist{itemjoin ={,\enspace},itemjoin* = { and\enspace}}
 

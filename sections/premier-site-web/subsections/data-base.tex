@@ -3,22 +3,37 @@ Nous allons créer une base de données en utilisant l'exemple de posts sur un b
 
 
 \subsubsection[PHPMyAdmin][]{\phpmyadmin{}}
-\phpmyadmin{} est une interface permettant à des ignares comme nou\ldots comme vous* de manipuler et de visualiser le contenu des bases de données facilement sans connaissances en \mysql. Normalement, la configuration a été effectuée lors de la formation précédente et vous devriez pouvoir y accéder en vous rendant sur \url{http://example:8080}.
+\phpmyadmin{} est une interface permettant à des ignares comme nou\ldots comme vous* de manipuler et de visualiser le contenu des bases de données facilement sans connaissances en \mysql. Normalement, la configuration a été effectuée lors de la formation précédente et vous devriez pouvoir y accéder en vous rendant sur \url{http://tutolaravel:8080}\footnote{Ou bien \url{http://localhost:8080}, cela dépend de l'url que vous avez choisi dans le \texttt{.env}.}.
 
 \subsubsection[Models][laravel.com/docs/12.x/eloquent\#generating-model-classes]{Models}
-Comme dit dans la \texttt{Section~\ref{sec:fonctionnement&philosophie}}, le \model{} \footnote{Rien à voir avec Kendall Jenner, reste concentré sur la formation.} est l'objet qui nous permettra d'interagir avec les \textit{posts} stockés dans notre base de données \footnote{pour chaque nouvel objet, on aura un \model{} correspondant}. Pour le créer, tapez \verb|sail artisan make:model Post -m|, et observez la création d'un fichier \verb|Post.php| dans \verb|app/Models/|. Pour le moment, la classe (au sens \php{} du terme) est vide, mais nous pouvons ajouter des méthodes \footnote{C'est juste un nom pour désigner une fonction se trouvant dans une classe en programmation orientée objet (POO). cf. \href{https://people.montefiore.uliege.be/boigelot/cours/oop/index.html}{INFO0062 - Object-Oriented Programming} de Boigelot.} spécifiques à ce \model{}, ce qui, nous le verrons, est très pratique.
+Comme dit dans la \texttt{Section~\ref{sec:fonctionnement&philosophie}}, le \model{} \footnote{Rien à voir avec Kendall Jenner, reste concentré sur la formation.} est l'objet qui nous permettra d'interagir avec les \textit{posts} stockés dans notre base de données \footnote{Pour chaque nouvel objet, on aura un \model{} correspondant.}. Pour le créer, tapez \verb|sail artisan make:model Post -m|.
+Cela génère un fichier \verb|Post.php|, dans \verb|/app/Models/|.
+On peut déjà y ajouter des propriétés comme \verb|$fillable|, qui définissent quels champs peuvent être remplis automatiquement lors de la création d'un nouvel enregistrement
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.2\linewidth]{figures-C1/postmodel.png}
+  \caption{Exemple d’un modèle Laravel \texttt{Post}}
+\end{figure}
+Voici une explication du code:
+\begin{itemize}
+  \item \verb|namespace App\Models;| : indique dans quel « dossier logique » se trouve notre classe.  
+  \item \verb|use Illuminate\Database\Eloquent\Model;| : importe la classe de base \texttt{Model} de Laravel.  
+  \item \verb|class Post extends Model| : on crée une classe \texttt{Post} qui hérite de \texttt{Model}, donc qui bénéficie de toutes les fonctionnalités Eloquent.  
+  \item \verb|protected $fillable = ['title', 'body'];| : on définit les colonnes de la table qui peuvent être assignées en masse (par exemple avec \verb|Post::create([...])|). Ici, on autorise \texttt{title} et \texttt{body}.  
+\end{itemize}
+Ainsi, notre model n'est plus un bout de code vide, mais un véritable objet capable de gérer des données venant de la base.
 
 \subsubsection[Migrations: théorie][laravel.com/docs/12.x/migrations\#introduction]{Migrations: comme les oiseaux?}
 
-Une \migration{} est un fichier qui permet de définir les \tables{} de notre base de données. Une \table{} est grosso modo un type de donnée que la \db{} va stocker. Par exemple, la liste de tous les utilisateurs est une \table{}, tout comme les \textit{posts} que nous allons créer. Chaque \table{} contient un certain nombre de \columns{} qui elles sont les données stockées en tant que telles. En l'occurrence, notre \table{} de \textit{posts} doit contenir une \column{} pour le titre d'un \textit{post} et une pour son contenu en lui-même\footnote{Tous ces termes sont compliqués à décrire avec des mots, mais sont en réalité très intuitifs quand on imagine les données affichées dans un grand tableau à double entrée.}.
+Une \migration{} est un fichier qui permet de définir les \tables{} de notre base de données. Une \table{} est grosso modo un type de donnée que la \db{} va stocker. Par exemple, la liste de tous les utilisateurs est une \table{}, tout comme les \textit{posts} que nous allons créer. Chaque \table{} contient un certain nombre de \columns{} qui, elles sont les données stockées en tant que telles. En l'occurrence, notre \table{} de \textit{posts} doit contenir une \column{} pour le titre d'un \textit{post} et une pour son contenu en lui-même \footnote{Tous ces termes sont compliqués à décrire avec des mots, mais sont en réalité très intuitifs quand on imagine les données affichées dans un grand tableau à double entrée.}.
 
-Pour créer notre migration, tapez \verb|rien du tout| car la \migration{} a été créée en même temps que notre \model{} grâce au \verb|-m|! Elle se trouve dans \\\verb|database/migration/xxxx_xx_xx_xxxxxx_create_posts_table.php|. \\Ensuite, remplissez-la comme à la \textsc{Figure~\ref{fig:basic_migration}}\footnote{lignes 16 et 17, de rien}:
+Pour créer notre migration, tapez \verb|rien du tout| car la \migration{} a été créée en même temps que notre \model{} grâce au \verb|-m|! Elle se trouve dans \\\verb|database/migration/xxxx_xx_xx_xxxxxx_create_posts_table.php|. \\Ensuite, remplissez-la comme à la \textsc{Figure~\ref{fig:basic_migration}}\footnote{lignes 16 et 17, de rien.}:
 
 Analysons tout a:
 \begin{itemize}
     \item \verb|function up()| et \verb|function down()|: La première est exécutée quand on souhaite créer les \tables{} à l'intérieur tandis que la deuxième est exécutée lorsqu'on souhaite supprimer les \tables{} de la \db{}. Pour l'utilisation simple que nous faisons des \migrations{}, pensez à \verb|down| tout ce que vous \verb|up|-per.
     \item \verb|Schema::create('posts',...| en gros, c'est la fonction utilisée pour créer la table \verb|'posts'|, et les \verb|$table->| qui suivent permettent de définir chaque \column{} de la table créée.
-    \item \verb|id()|: l'id est ce qu'on appelle la \texttt{Primary Key}. Unique pour chaque \row{}\footnote{une \row{} est un élément de donnée dans une \table{}}, il permet d'identifier chaque élément de donnée. Il se trouve par défaut sur chaque \table{} nouvellement créée.
+    \item \verb|id()|: l'id est ce qu'on appelle la \texttt{Primary Key}. Unique pour chaque \row{}\footnote{une \row{} est un élément de donnée dans une \table{}.}, il permet d'identifier chaque élément de donnée. Il se trouve par défaut sur chaque \table{} nouvellement créée.
     \item \verb|string()| permet de créer une \column{} de type string, de taille 255. La taille est modifiable en ajoutant un nombre <255 en second argument.
     \item \verb|mediumtext()| permet de créer une \column{} de $16.777.215$ charactères (oula).
     \item \verb|timestamps()| ajoute une date de création et de modification à la \table{}. Ces deux \columns{} sont également ajoutées par défaut.
@@ -97,7 +112,7 @@ Petite parenthèse avant de continuer: un exemple de route générée par la com
 \verb|Route::get('/posts/{post}', [PostsController::class, show])->name('posts.show')|
 le \verb|{...}| dans l'URL est une sorte de paramètre dans l'URL, qui permet de passer des informations au controller. En effet, chaque paramètre dans l'URL sera passé (si on le souhaite) en argument à la fonction du controller appellée par cette \route, dans le même ordre d'apparition que dans l'URL. Ce paramètre est extrêmement utile comme nous le verrons à la \texttt{Section~\ref{sec:post_show}}. Pour plus d'informations sur les \routes générées par cette commande, voyez \href{https://laravel.com/docs/12.x/controllers}{ceci}. Fin de la parenthèse.
 
-Bon, maintenant, il faut remplir ce \controller{} et créer les \views{} qui vont avec. Commençons par les plus simples, \verb|index()| et \verb|show()|.
+Bon, maintenant, il faut remplir ce \controller{} et créer les pages qui vont avec. Commençons par les plus simples, \verb|index()| et \verb|show()|.
 
 \subsubsubsection{index}
 Cette méthode est utilisée pour afficher la liste de tous les \texttt{Posts} créés. 
@@ -117,7 +132,7 @@ Ensuite, nous allons créer un nouveau dossier \verb|Posts| dans  \\ \verb|resou
 
 Ici, tout est déjà connu mis à part le \verb|posts.length === 0 ? (X) : (Y)|,  \\ qui vérifie s'il y a un post : si non, il affiche X sinon Y \footnote{Il s'agit d'un opérateur ternaire, comme en C, permettant de faire un \texttt{if...else} en une seule ligne.}. Ensuite, il y a le \verb|"."| permettant d'accéder aux différents champs des objets que sont nos \verb|$post|.
 
-Enfin, il ne nous reste plus qu'à ajouter un bouton à notre navbar \footnote{Dans Layouts/AppLayout.jsx (juste de rien pour ça)} afin d'accéder à cette page.
+Enfin, il ne nous reste plus qu'à ajouter un bouton à notre navbar \footnote{Dans Layouts/AppLayout.jsx (juste de rien pour ça).} afin d'accéder à cette page.
 
 \begin{figure}[!h]
     \centering
@@ -134,7 +149,7 @@ Même chose que pour la page précédente, il faut remplir la fonction \verb|sho
 \end{wrapfigure}
 Ici, nous utilisons ce que j'ai expliqué en dessous de la \textsc{Figure~\ref{fig:post_route}}. La fonction \verb|show()| prend en argument \verb|$post|. Bah oui, ce qui est logique car pour afficher un post en particulier, il faut donner à \laravel le \texttt{\$post} en question. 
 
-Enfin, la \view{} correspondante peut être créée au nom et emplacement \texttt{resources/js/Pages/Posts/Show.jsx}
+Enfin, la page correspondante peut être créée au nom et emplacement \texttt{resources/js/Pages/Posts/Show.jsx}
 
 \begin{figure}[!h]
     \centering
@@ -153,9 +168,9 @@ Cette partie est plus intéressante car elle va amener un nouveau concept, les \
     \vspace{-0.5cm}
     \includegraphics[width=0.4\textwidth]{figures-C1/postscontroller_create.png}
 \end{wrapfigure}
-Tout d'abord, remplissons la méthode \verb|create()| du \texttt{controller} et créons le fichier \\ \verb|resources/posts/create.blade.php| comme nous en avons maintenant l'habitude.
+Tout d'abord, remplissons la méthode \verb|create()| du \texttt{controller} et créons le fichier \\ \verb|resources/posts/create.jsx| comme nous en avons maintenant l'habitude.
 
-Maintenant, il faut remplir la \view:
+Maintenant, il faut remplir la page:
 
 \begin{figure}[!h]
     \centering
@@ -194,7 +209,7 @@ Tout d'abord, nous allons vérifier si les 2 champs \verb|titre| et \verb|messag
     \includegraphics[width=0.5\textwidth]{figures-C1/postscontroller_store.png}
     \caption{Méthode \texttt{store()}}
 \end{wrapfigure}
-L'étape suivante est de créer un nouveau post, via son \model{}. Ensuite, on remplit ses champs avec les valeurs obtenues dans le \form{} et on le sauvegarde dans la base de donnée. Enfin, il ne reste plus qu'à envoyer l'utilisateur quelque part (la liste des posts) et le tour est joué!\footnote{La variable \verb|'success'| sera utilisée dans la \texttt{Section~\ref{sec:messages}}} Plus qu'à rajouter les fonctionnalités de modification et de suppression et puis nous en aurons terminé.
+L'étape suivante est de créer un nouveau post, via son \model{}. Ensuite, on remplit ses champs avec les valeurs obtenues dans le \form{} et on le sauvegarde dans la base de données. Enfin, il ne reste plus qu'à envoyer l'utilisateur quelque part (la liste des posts) et le tour est joué!\footnote{La variable \verb|'success'| sera utilisée dans la \texttt{Section~\ref{sec:messages}}.} Plus qu'à rajouter les fonctionnalités de modification et de suppression et puis nous en aurons terminé.
 
 \vspace{1.5cm}
 \subsubsubsection{edit}
@@ -209,14 +224,14 @@ Pour l'édition, c'est plutôt simple. Tout d'abord, remplissons la méthode du 
     \label{fig:posts-methode-edit}
 \end{figure}
 \newpage
-Ensuite, créons la \view{} dédiée:
+Ensuite, créons la page dédiée:
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.75\textwidth]{figures-C1/posts_edit.png}
     \caption{\texttt{Posts/Edit.jsx}}
 \end{figure}
 
-Remarquez qu'il n'y a presque aucune différence avec la \view{} de création de post, et c'est bien normal: on peut l'utiliser quasi à l'identique à condition de mettre les valeurs du post dans les bons champs lorsque l'on accède à la page. Une différence est néanmoins à noter, la présence du \verb|patch()|, ligne 15. Cette méthode permet de remplacer une donnée par une autre (notre post à modifier).
+Remarquez qu'il n'y a presque aucune différence avec la page de création de post, et c'est bien normal: on peut l'utiliser quasi à l'identique à condition de mettre les valeurs du post dans les bons champs lorsque l'on accède à la page. Une différence est néanmoins à noter, la présence du \verb|patch()|, ligne 15. Cette méthode permet de remplacer une donnée par une autre (notre post à modifier).
 
 \subsubsubsection{update}\label{sec:posts_update}
 
