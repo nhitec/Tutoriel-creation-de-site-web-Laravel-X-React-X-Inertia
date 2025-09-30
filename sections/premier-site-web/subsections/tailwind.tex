@@ -19,7 +19,7 @@ Le langage suit la philosophie suivante : à chaque sélecteur, on associe des p
 \end{itemize}
 
 \subsubsection[Pourquoi utiliser Tailwind?][fr.wikipedia.org/wiki/Tailwind\_CSS]{Pourquoi utiliser \tailwind{}?}
-Créer un \css{} pour chaque propriété d'un composant peut prendre énormement de temps. C'est pour cela que de nombreux \textit{frameworks front-end\footnote{le \textit{front-end, en opposition au back-end, désigne tout ce qui constitue l'interface visible par l'utilisateur (ex.: page web, images, etc\ldots}}} existent afin d'amener de nombreuses \verb|class| et plugins \js{} prédéfinis. En l'occurrence, nous allons utiliser \tailwind{}, qui est un \textit{framework} utilisé pour construire des sites de manière \textit{responsive\footnote{\textit{responsive} signifie que le site/composant adapte son rendu en fonction de la taille de l'écran, du format etc, ce qui est quand même très important.}} rapidement et facilement.
+Créer un \css{} pour chaque propriété d'un composant peut prendre énormement de temps. C'est pour cela que de nombreux \textit{frameworks front-end\footnote{Le \textit{front-end, en opposition au back-end, désigne tout ce qui constitue l'interface visible par l'utilisateur (ex.: page web, images, etc\ldots}}.} existent afin d'amener de nombreuses \verb|class| et plugins \js{} prédéfinis. En l'occurrence, nous allons utiliser \tailwind{}, qui est un \textit{framework} utilisé pour construire des sites de manière \textit{responsive\footnote{\textit{Responsive} signifie que le site/composant adapte son rendu en fonction de la taille de l'écran, du format etc, ce qui est quand même très important.}} rapidement et facilement.
 
 Pour plus de renseignementss et pour découvrir les fonctionnalités de \tailwind{}, rendez-vous sur \href{https://tailwindcss.com/docs}{Doc \tailwind{}}. Dans votre futur, vous utiliserez énormément de \verb|class| \tailwind. Il est donc important de se familiariser avec rapidement, par exemple en lisant la documentation des \verb|class| que vous ne connaissez pas, même si c'est fort déroutant au début afin que cela roule tout seul à moyen terme.
 
@@ -52,9 +52,9 @@ Cependant, nous allons ajouter notre \css{} contenant la couleur de notre chère
 
 
 
-\subsubsection[Utilisation]{Utilisation}
+\subsubsection[Utilisation]{Utilisation} \label{sec:utilisation}
 
-Comme expliqué plus haut, \tailwind{} nous fournit une multitude de \verb|class| que nous pouvons utiliser pour styliser nos \textit{tags} \html{}. Modifions donc nos \views{} \verb|About.jsx| et \verb|Index.jsx| comme aux \textsc{Figures~\ref{fig:about_bs}\&\ref{fig:index_bs}}.
+Comme expliqué plus haut, \tailwind{} nous fournit une multitude de \verb|class| que nous pouvons utiliser pour styliser nos \textit{tags} \html{}. Modifions donc nos pages \verb|About.jsx| et \verb|Index.jsx| comme aux \textsc{Figures~\ref{fig:about_bs}\&\ref{fig:index_bs}}.
 
 \SaveVerb{about}|About.jsx|
 \SaveVerb{index}|Index.jsx|
@@ -76,11 +76,11 @@ Comme expliqué plus haut, \tailwind{} nous fournit une multitude de \verb|class
     \vspace{-0.5cm}
     \includegraphics[width=0.35\textwidth]{figures-C1/tailwind_intellisense.png}
 \end{wrapfigure}
-Par exemple, dans la \textsc{Figure~\ref{fig:about_bs}}, \verb|className="text-center"| assigne la classe \verb|text-center| à l'élément. Astuce : En passant la souris sur la classe \tailwind{}, vous verrez apparaître la vraie classe \css{}\footnote{Grâce à une extension incluse dans le pack N-HiTec - Op\&Ex} permettant de centrer un élément dans son conteneur.
+Par exemple, dans la \textsc{Figure~\ref{fig:about_bs}}, \verb|className="text-center"| assigne la classe \verb|text-center| à l'élément. Astuce : En passant la souris sur la classe \tailwind{}, vous verrez apparaître la vraie classe \css{}\footnote{Grâce à une extension incluse dans le pack N-HiTec - Op\&Ex.} permettant de centrer un élément dans son conteneur.
 
 
 
-Pour la page des services, nous allons introduire une nouvelle mécanique : l'\textbf{affichage dynamique} c-à-d passer des données du back-end vers le front-end. \footnote{C'est comme ça que votre nom d'utilisateur est affiché sur les réseaux sociaux. Le nom d'utilisateur est récolté dans la base de données et envoyé au front-end qui l'affiche sur l'interface utilisateur.} Pour le moment, nous n'allons pas encore nous embêter avec la base de données, nous allons simplement voir comment la mécanique de base fonctionne. Rappelez-vous de la \texttt{Section~\ref{sec:fonctionnement&philosophie}}, ce sont les \controllers{} qui s'occupent de manipuler les données avant d'afficher une \view{}. Dès lors, c'est dans la fonction \verb|services()| de \verb|PagesController.php| que nous allons ajouter des choses: \verb|$titlefromcontroller| et \verb|$services| sont 2 variables, et nous les passons à la \view{} par l'intermédiaire du \verb|[]|. Ensuite, nous pouvons utiliser les variables \verb|title| et \verb|services| dans la \view{} concernée.
+Pour la page des services, nous allons introduire une nouvelle mécanique : l'\textbf{affichage dynamique} c-à-d passer des données du back-end vers le front-end. \footnote{C'est comme ça que votre nom d'utilisateur est affiché sur les réseaux sociaux. Le nom d'utilisateur est récolté dans la base de données et envoyé au front-end qui l'affiche sur l'interface utilisateur.} Pour le moment, nous n'allons pas encore nous embêter avec la base de données, nous allons simplement voir comment la mécanique de base fonctionne. Rappelez-vous de la \texttt{Section~\ref{sec:fonctionnement&philosophie}}, ce sont les \controllers{} qui s'occupent de manipuler les données avant d'afficher une page. Dès lors, c'est dans la fonction \verb|services()| de \verb|PagesController.php| que nous allons ajouter des choses: \verb|$titlefromcontroller| et \verb|$services| sont 2 variables, et nous les passons à la page par l'intermédiaire du \verb|[]|. Ensuite, nous pouvons utiliser les variables \verb|title| et \verb|services| dans la page concernée.
 
 \begin{figure}[h]
     \centering
@@ -118,19 +118,19 @@ Et voilà! Maintenant, il suffit de taper \verb|npm run dev|\footnote{Cette comm
         \fbox{\includegraphics[width=\textwidth]{figures-C1/index_page.png}}
     \end{subfigure}\hfill
     \begin{subfigure}[c]{0.35\textwidth}
-        \caption{\url{http://example/}} 
+        \caption{\url{http://tutolaravel/}} 
     \end{subfigure}
     \begin{subfigure}[c]{0.60\textwidth}
         \fbox{\includegraphics[width=\textwidth]{figures-C1/about_page.png}}
     \end{subfigure}\hfill
     \begin{subfigure}[c]{0.35\textwidth}
-        \caption{\url{http://example/about}}
+        \caption{\url{http://tutolaravel/about}}
     \end{subfigure}
     \begin{subfigure}[c]{0.60\textwidth}
         \fbox{\includegraphics[width=\textwidth]{figures-C1/services_page.png}}
     \end{subfigure}\hfill
     \begin{subfigure}[c]{0.35\textwidth}
-        \caption{\url{http://example/services}} 
+        \caption{\url{http://tutolaravel/services}} 
     \end{subfigure}
     \caption{3 pages créées jusqu'à présent et stylisées avec \tailwind{}.}
     \label{fig:3pages}
@@ -144,7 +144,7 @@ C'est bien beau, mais jusque ici le seul moyen de naviguer entre les pages est d
 
 Comme son nom l'indique, elle sert à naviguer entre les pages. Cependant, c'est un gros morceau qui utilise beaucoup de \verb|class| \tailwind{}, donc il va falloir s'accrocher.
 
-Heureusement pour nous, \react{} inclut une bibliothèque de composants prêts à l'emploi \footnote{Ceux-ci se trouvent dans \texttt{resources/js/Components}}. Dans notre exemple, nous allons utiliser \texttt{ResponsiveNavLink.jsx}.
+Heureusement pour nous, \react{} inclut une bibliothèque de composants prêts à l'emploi \footnote{Ceux-ci se trouvent dans \texttt{resources/js/Components}.}. Dans notre exemple, nous allons utiliser \texttt{ResponsiveNavLink.jsx}.
 
 D'abord, dans le dossier \verb|resources/js/Layouts|, créez un fichier \verb|AppLayout.jsx|. Remplissez ce fichier avec le contenu de la \textsc{Figure~\ref{fig:navbar}}.
 
@@ -188,6 +188,6 @@ Néanmoins, il reste un point important à aborder : le \textit{responsive desig
         \fbox{\includegraphics[width=0.2\textwidth]{figures-C1/navbar_phone_size.png}}
         \caption[La couleur rouge est obtenue en remplaçant les mentions \texttt{indigo} par \texttt{red} dans \texttt{ResponsiveNavLink.tsx}]{Navbar vue depuis un téléphone (largeur $<640\mathrm{px}$) \footnotemark}
 \end{figure}
-\footnotetext{La couleur rouge est obtenue en remplaçant les \texttt{class} \css{} \texttt{indigo} par \texttt{red} dans \texttt{ResponsiveNavLink.tsx}}
+\footnotetext{La couleur rouge est obtenue en remplaçant les \texttt{class} \css{} \texttt{indigo} par \texttt{red} dans \texttt{ResponsiveNavLink.tsx}.}
 
 \newpage
